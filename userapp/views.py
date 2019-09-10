@@ -1,4 +1,5 @@
 from django.shortcuts import render , redirect
+from django.http import HttpResponse
 from django.contrib.auth.models import User,auth
 from django.contrib import messages
 # Create your views here.
@@ -64,12 +65,13 @@ def loginapi(request):
     if request.method == "POST":
         username = request.POST['text1']
         password = request.POST['password']
-        print(username,password)
-
         user = auth.authenticate(username=username,password=password)
-
+        hi = User.objects.get(username=username)
+        print("manjesh",user,">",hi.id)
         if user is not None:
             auth.login(request,user)
+            response = HttpResponse("Cookie Set")  
+            response.set_cookie('java-tutorial', 'javatpoint.com')  
             messages.success(request,'login successfull')
             return redirect('/about')
 
