@@ -19,7 +19,6 @@
     </script>
     <!-- //Meta tag Keywords -->
     <!-- Custom-Files -->
-    <link rel="stylesheet" href= "{% static 'css/bootstrap.css' %">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <!-- Bootstrap-Core-CSS -->
     <link rel="stylesheet" href= "{% static 'css/style.css' %}" type="text/css" media="all" />
@@ -44,8 +43,13 @@
                     </div>
 
                     <div class="forms ml-auto">
-                        <a href="/login" class="btn"><span class="fa fa-user-circle-o"></span> Sign In</a>
-                        <a href="/register" class="btn"><span class="fa fa-pencil-square-o"></span> Sign Up</a>
+                            {% if user.is_authenticated %}
+                            <a href="#" class="btn"><span class="fa fa-user-circle-o"></span>Hello {{ user.username }}</a>
+                         <a href="/logout" class="btn"><span class="fa fa-pencil-square-o"></span> Logout</a>
+                         {% else %}
+                            <a href="/login" class="btn"><span class="fa fa-user-circle-o"></span> Sign In</a>
+                         <a href="/register" class="btn"><span class="fa fa-pencil-square-o"></span> Sign Up</a>
+                         {% endif %}
                     </div>
                 </div>
                 <div class="nav-top-wthree">

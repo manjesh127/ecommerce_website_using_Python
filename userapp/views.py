@@ -26,6 +26,10 @@ def about(request):
 def coming(request):
     return render(request,'coming.html')        
 
+def logout(request):
+    auth.logout(request)
+    return redirect('/')
+
 def registerapi(request):
 
     if request.method == "POST":
@@ -67,7 +71,7 @@ def loginapi(request):
         if user is not None:
             auth.login(request,user)
             messages.success(request,'login successfull')
-            return redirect('/login')
+            return redirect('/about')
 
         else:
             messages.info(request,'Invalid credentials')
