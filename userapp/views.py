@@ -1,7 +1,8 @@
 from django.shortcuts import render , redirect
-from django.http import HttpResponse
+from django.http import HttpResponse,HttpResponseRedirect
 from django.contrib.auth.models import User,auth
 from django.contrib import messages
+import jwt
 # Create your views here.
 def home(request):
     return render(request,'index.html')
@@ -22,7 +23,17 @@ def single(request):
     return render(request,'single.html')
     
 def about(request):
-    return render(request,'about.html')  
+    manjesh = request.COOKIES
+    print("READ",manjesh)
+    if not manjesh:
+        return redirect('/')
+    elif manjesh=="":
+        return redirect('/')
+    elif 'token' in manjesh:
+        # return redirect('/about')  
+        return render(request,'about.html')
+    else:
+        return redirect('/')      
 
 def coming(request):
     return render(request,'coming.html')        
@@ -70,10 +81,15 @@ def loginapi(request):
         print("manjesh",user,">",hi.id)
         if user is not None:
             auth.login(request,user)
-            response = HttpResponse("Cookie Set")  
-            response.set_cookie('java-tutorial', 'javatpoint.com')  
+            encoded_token = jwt.encode({'id':hi.id}, "manjesh", algorithm='HS256')
+            
+            response = HttpResponseRedirect("/about")
+            response.set_cookie('token', encoded_token)  
+            # decoded = jwt.decode(encoded_token, "manjesh", algorithms='HS256')
+            
             messages.success(request,'login successfull')
-            return redirect('/about')
+    
+            return response
 
         else:
             messages.info(request,'Invalid credentials')
