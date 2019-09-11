@@ -14,33 +14,78 @@ def register(request):
     return render(request,'register.html') 
 
 def contact(request):
-    return render(request,'contact.html') 
-
-def shop(request):
-    return render(request,'shop.html') 
-
-def single(request):
-    return render(request,'single.html')
-    
-def about(request):
     manjesh = request.COOKIES
-    print("READ",manjesh)
+    
     if not manjesh:
         return redirect('/')
     elif manjesh=="":
         return redirect('/')
     elif 'token' in manjesh:
-        # return redirect('/about')  
+        return render(request,'contact.html') 
+    else:
+        return redirect('/')
+     
+
+def shop(request):
+    manjesh = request.COOKIES
+    
+    if not manjesh:
+        return redirect('/')
+    elif manjesh=="":
+        return redirect('/')
+    elif 'token' in manjesh:
+        
+        return render(request,'shop.html') 
+    else:
+        return redirect('/') 
+    
+
+def single(request):
+    manjesh = request.COOKIES
+    
+    if not manjesh:
+        return redirect('/')
+    elif manjesh=="":
+        return redirect('/')
+    elif 'token' in manjesh:
+        
+        return render(request,'single.html')
+    else:
+        return redirect('/') 
+    
+    
+def about(request):
+    manjesh = request.COOKIES
+    
+    if not manjesh:
+        return redirect('/')
+    elif manjesh=="":
+        return redirect('/')
+    elif 'token' in manjesh:
+          
         return render(request,'about.html')
     else:
         return redirect('/')      
 
 def coming(request):
-    return render(request,'coming.html')        
+    manjesh = request.COOKIES
+    
+    if not manjesh:
+        return redirect('/')
+    elif manjesh=="":
+        return redirect('/')
+    elif 'token' in manjesh:
+          
+        return render(request,'coming.html') 
+    else:
+        return redirect('/')
+            
 
 def logout(request):
     auth.logout(request)
-    return redirect('/')
+    response = HttpResponseRedirect("/")
+    response.delete_cookie('token')
+    return response
 
 def registerapi(request):
 
