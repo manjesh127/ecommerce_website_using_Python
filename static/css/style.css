@@ -251,7 +251,7 @@ nav ul ul {
 }
 
 /* Display Dropdowns on Hover */
-nav ul li:hover > ul {
+nav ul li:hover>ul {
     display: block;
 }
 
@@ -285,7 +285,7 @@ nav ul ul ul li {
 }
 
 /* Change ' +' in order to change the Dropdown symbol */
-li > a:only-child:after {
+li>a:only-child:after {
     content: '';
 }
 
@@ -316,7 +316,7 @@ li > a:only-child:after {
 
     /* Hide the navigation menu by default */
     /* Also hide the  */
-    .toggle + a,
+    .toggle+a,
     .menu {
         display: none;
     }
@@ -358,7 +358,7 @@ li > a:only-child:after {
     }
 
     /* Display Dropdown when clicked on Parent Lable */
-    [id^=drop]:checked + ul {
+    [id^=drop]:checked+ul {
         display: block;
         background: #fff;
         padding: 15px 0;
@@ -431,8 +431,8 @@ li > a:only-child:after {
     }
 
     /* Hide menus on hover */
-    nav ul ul li:hover > ul,
-    nav ul li:hover > ul {
+    nav ul ul li:hover>ul,
+    nav ul li:hover>ul {
         display: none;
     }
 
@@ -479,13 +479,15 @@ li > a:only-child:after {
 
 /*--banner--*/
 .main-sec {
-    background: #74d2e7;
+    /* background: #74d2e7; */
+    background: linear-gradient(331deg, #be42ff 0%, #6c7cff 53%, #73fefb 100%);
     min-height: 43em;
     position: relative;
 }
 
 .main-sec.inner-page {
-    background: #74d2e7;
+    /* background: #74d2e7; */
+    background: linear-gradient(331deg, #be42ff 0%, #6c7cff 53%, #73fefb 100%);
     min-height: 20em;
     position: relative;
 }
@@ -848,14 +850,14 @@ ul.list-login-bottom li:nth-child(2) {
     cursor: pointer;
 }
 
-.checkbox input:checked + i:after,
-.radio input:checked + i:after {
+.checkbox input:checked+i:after,
+.radio input:checked+i:after {
     opacity: 1;
 }
 
 
-.checkbox input + i:after,
-.radio input + i:after {
+.checkbox input+i:after,
+.radio input+i:after {
     position: absolute;
     opacity: 0;
     transition: opacity 0.1s;
@@ -1016,15 +1018,15 @@ ul.list-login-bottom li:nth-child(2) a,
     transition: .4s;
 }
 
-input:checked + .slider {
+input:checked+.slider {
     background-color: #cfd7d9;
 }
 
-input:focus + .slider {
+input:focus+.slider {
     box-shadow: 0 0 1px #555;
 }
 
-input:checked + .slider:before {
+input:checked+.slider:before {
     -webkit-transform: translateX(14px);
     -ms-transform: translateX(14px);
     transform: translateX(14px);
@@ -1414,6 +1416,28 @@ h3.sub-w3ls-headf {
 
 .cpy-right a {
     color: #888;
+}
+
+.coin img {
+    /* width: 100px;
+    height: 100px; */
+    /* border-radius: 100px; */
+    /* background: linear-gradient(to right, red 50%, black 50%); */
+    animation: coin-rotate 2s both infinite;
+}
+
+@keyframes coin-rotate {
+    0 {
+        transform: rotateY(0);
+    }
+
+    50% {
+        transform: rotateY(180deg);
+    }
+
+    100% {
+        transform: rotateY(0deg);
+    }
 }
 
 /* //social icons */
