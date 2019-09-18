@@ -24,6 +24,8 @@ License URL: http://creativecommons.org/licenses/by/3.0/
             window.scrollTo(0, 1);
         }
     </script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
     <!-- //Meta tag Keywords --> 
     <!-- Custom-Files -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
@@ -103,10 +105,26 @@ License URL: http://creativecommons.org/licenses/by/3.0/
         <!--/banner-->
         <div class="banner-wthree-info container">
             <div class="row">
-                <div class="col-lg-5 banner-left-info">
+                <div class="col-lg-5  block">
                     <h3>Ethereum <span>blockchain</span></h3>
-                    <h5>BLOCK : {{block}}</h5><br>
-                    <a href="/shop" class="btn shop">buy ether</a>
+                    <h5>BLOCK : {{block}}</h5>
+                    <h4>enter ether address</h4>
+                    <form action="/blockchain/balanceEth/" method="post">
+                        {% csrf_token %}
+                        <input type="text" name="address" id="ethadd">
+                        {% if messages %}
+                        <ul class="messages">
+                        {% for message in messages %}
+                          <h5 {% if message.tags %} class="{{ message.tags }}"{% endif %}>
+                         {% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR %}Important: {% endif %}
+                           {{ message }}
+                        </h5>
+                       {% endfor %}
+                        </ul>
+                      {% endif %}
+                        <button type="submit" class="btn shop">check balance</button>
+                    </form>
+                  
                 </div>
 
                 <div class="col-lg-7 banner-img coin">
@@ -410,7 +428,9 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 
     </div>
     <!-- //copyright -->
-
+    <script>
+        axios.post('/blockchain/balanceEth',value:)
+    </script>
 </body>
 
 </html>

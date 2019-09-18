@@ -19,6 +19,6 @@ from django.urls import path
 
 urlpatterns = [
     path('',include('userapp.urls')),
-    path('blockchain',include('blockchain.urls')),
+    path('blockchain/',include('blockchain.urls')),
     path('admin/', admin.site.urls),
 ]
