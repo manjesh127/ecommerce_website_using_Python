@@ -1,5 +1,7 @@
 from django.shortcuts import render,redirect
 from django.contrib import messages
+import json
+from django.http import JsonResponse
 from web3 import Web3
 # my_provider = Web3.IPCProvider('https://rinkeby.infura.io/v2/87d8eb0d3c004535bced571f19986f18')
 w3 = Web3(Web3.HTTPProvider("https://rinkeby.infura.io/v2/87d8eb0d3c004535bced571f19986f18"))
@@ -15,7 +17,7 @@ def account(request):
 
 def home(request):
     if w3.isConnected():
-        print("connected=== block=>",w3.eth.blockNumber)
+        # print("connected=== block=>",w3.eth.blockNumber)
         block = w3.eth.blockNumber
         return render(request,'blockchainhome.html',{'block':block})
     else:
