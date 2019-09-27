@@ -709,6 +709,12 @@ input#ethadd {
     width: 100%;
 }
 
+input#ethaddtxn {
+    margin-block-start: 1rem;
+    margin-bottom: 1rem;
+    width: 100%;
+}
+
 .icon-gd span {
     font-size: 2em;
     text-align: center;

@@ -25,7 +25,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
         }
     </script>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-
+    <script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
     <!-- //Meta tag Keywords --> 
     <!-- Custom-Files -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
@@ -124,7 +124,21 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                       {% endif %}
                         <button type="submit" class="btn shop">check balance</button>
                     </form>
-                  
+                    <form method="post">
+                        {% csrf_token %}
+                        <input type="text" name="address" id="ethaddtxn">
+                        {% if messages %}
+                        <ul class="messages">
+                        {% for message in messages %}
+                          <h5 {% if message.tags %} class="{{ message.tags }}"{% endif %}>
+                         {% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR %}Important: {% endif %}
+                           {{ message }}
+                        </h5>
+                       {% endfor %}
+                        </ul>
+                      {% endif %}
+                        <button type="submit" class="btn shop" onclick="txnfun()">send ether</button>
+                    </form>
                 </div>
 
                 <div class="col-lg-7 banner-img coin">
@@ -428,9 +442,9 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 
     </div>
     <!-- //copyright -->
-    <script>
-        axios.post('/blockchain/balanceEth',value:)
-    </script>
 </body>
+<script src="{% static 'js/blockchain.js' %}"></script>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 
 </html>
+

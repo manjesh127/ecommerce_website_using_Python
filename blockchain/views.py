@@ -3,10 +3,8 @@ from django.contrib import messages
 import json
 from django.http import JsonResponse
 from web3 import Web3
-# my_provider = Web3.IPCProvider('https://rinkeby.infura.io/v2/87d8eb0d3c004535bced571f19986f18')
 w3 = Web3(Web3.HTTPProvider("https://rinkeby.infura.io/v2/87d8eb0d3c004535bced571f19986f18"))
 
-# Create your views here.
 
 def account(request):
     myAccount = w3.eth.account.create('pass')
@@ -24,14 +22,23 @@ def home(request):
         print("not connected")
         
 def txn(request):
-    nonce = w3.eth.getTransactionCount('0x030810339E7441AEd6639Eda5d7d6B65aF0fD518')
-    transaction={
-        'to':"0xaCEe93eC465888D84337586d44273D110672032e",'value': w3.toWei(2, 'gwei'),'gas': 21000,'gasPrice': w3.toWei('1', 'gwei'),'nonce': nonce,} 
+    if request.method == 'GET':
+        return redirect('/blockchain')
+    else:
+        print("hii")
+        received_json_data=json.loads(request.body)
+        print(received_json_data)
 
-    key ='0xE08F88AC9E86ECD0E6B2F9F46AD71B1E4357CE033C38A2B6E9E04E4561B82F5E'   
-    signed = w3.eth.account.sign_transaction(transaction, key)
-    txnhash = w3.eth.sendRawTransaction(signed.rawTransaction)
-    print("transaction hash===>",w3.toHex(txnhash))
+
+
+    # nonce = w3.eth.getTransactionCount('0x030810339E7441AEd6639Eda5d7d6B65aF0fD518')
+    # transaction={
+    #     'to':"0xaCEe93eC465888D84337586d44273D110672032e",'value': w3.toWei(2, 'gwei'),'gas': 21000,'gasPrice': w3.toWei('1', 'gwei'),'nonce': nonce,} 
+
+    # key ='0xE08F88AC9E86ECD0E6B2F9F46AD71B1E4357CE033C38A2B6E9E04E4561B82F5E'   
+    # signed = w3.eth.account.sign_transaction(transaction, key)
+    # txnhash = w3.eth.sendRawTransaction(signed.rawTransaction)
+    # print("transaction hash===>",w3.toHex(txnhash))
 
 
 
