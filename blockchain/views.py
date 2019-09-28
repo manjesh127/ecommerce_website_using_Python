@@ -25,10 +25,28 @@ def txn(request):
     if request.method == 'GET':
         return redirect('/blockchain')
     else:
-        print("hii")
-        received_json_data=json.loads(request.body)
-        print(received_json_data)
+        data=json.loads(request.body)
+        print(data['address'])
+        if w3.isAddress(data['address']):
+            try:
+                nonce = w3.eth.getTransactionCount('0x030810339E7441AEd6639Eda5d7d6B65aF0fD518')
+                transaction={
+                    'to':data['address'],'value': w3.toWei(2, 'gwei'),'gas': 21000,'gasPrice': w3.toWei('1', 'gwei'),'nonce': nonce,} 
 
+                key ='0xE08F88AC9E86ECD0E6B2F9F46AD71B1E4357CE033C38A2B6E9E04E4561B82F5E'   
+                signed = w3.eth.account.sign_transaction(transaction, key)
+                txnhash = w3.eth.sendRawTransaction(signed.rawTransaction)
+                print("transaction hash===>",w3.toHex(txnhash))
+                return JsonResponse({'success':True,'message':txnhash})
+            except Exception as e:
+                print("exception",e)
+                return JsonResponse({'success':False,'message':'Invalid address'})
+            else:
+                return JsonResponse({'success':False,'message':'Invalid address else try'})
+            
+        else:
+            return JsonResponse({'success':False,'message':'Invalid address'})
+    
 
 
     # nonce = w3.eth.getTransactionCount('0x030810339E7441AEd6639Eda5d7d6B65aF0fD518')
